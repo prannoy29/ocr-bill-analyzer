@@ -246,15 +246,18 @@ def get_provider_name(b64_string,boundsBlock,boundsTest):
     for block in boundsBlock:
         if distance_between_point(block.vertices[0],origin) < min_distance:
             min_distance = distance_between_point(block.vertices[0],origin)
+            print(min_distance)
+            print(block)
             provider_name_container = block
 
     resize_container_with_buffer(provider_name_container,10)
-    list = get_all_words_within_container(provider_name_container,boundsTest)
-    # image = Image.open(b64_string)
-    # draw_boxes(image,boundsBlock,'green')
-    # rgb_im = image.convert('RGB')
-    # rgb_im.show()
-    return ' '.join(list)
+    list_all = get_all_words_within_container(provider_name_container,boundsTest)
+    # print(list_all)
+    image = Image.open(b64_string)
+    draw_boxes(image,boundsBlock,'green')
+    rgb_im = image.convert('RGB')
+    rgb_im.show()
+    return ' '.join(list_all)
 
 def get_provider_address(b64_string,provider_name,boundsTest,boundsBlock):
     pincode_bound = get_matched_word(r'^[0-9]{5}(?:-[0-9]{4})?$',boundsTest)
